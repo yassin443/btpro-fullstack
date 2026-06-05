@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('clients/', views.clients, name='clients'),
+    path('clients/<int:pk>/', views.client_detail, name='client_detail'),
+    path('', views.projets, name='projets'),
+    path('<int:pk>/', views.projet_detail, name='projet_detail'),
+    path('<int:projet_pk>/phases/', views.phases, name='phases'),
+    path('temps/', views.feuilles_de_temps, name='feuilles_de_temps'),
+    path('temps/stats/', views.stats_temps, name='stats_temps'),
+    path('planning/', views.planning_equipe, name='planning_equipe'),
+    path('rentabilite/', views.rentabilite, name='rentabilite'),
+    path('sous-traitants/', views.sous_traitants, name='sous_traitants'),
+    path('sous-traitants/stats/', views.stats_sous_traitants, name='stats_sous_traitants'),
+    path('sous-traitants/<int:pk>/', views.sous_traitant_detail, name='sous_traitant_detail'),
+    path('phases/<int:pk>/', views.phase_detail, name='phase_detail'),
+    path('temps/<int:pk>/', views.feuille_detail, name='feuille_detail'),
+    path('<int:phase_pk>/taches/', views.taches, name='taches'),
+    path('taches/', views.toutes_taches, name='toutes_taches'),
+    path('taches/<int:pk>/', views.tache_detail, name='tache_detail'),
+    path('mes-taches/', views.mes_taches, name='mes_taches'),
+    path('permis/', views.permis_list, name='permis_list'),
+    path('permis/<int:pk>/', views.permis_detail, name='permis_detail'),
+    path('budget/', views.budget_list, name='budget_list'),
+    path('budget/<int:pk>/', views.budget_detail, name='budget_detail'),
+    path('reunions/', views.reunions_list, name='reunions_list'),
+    path('reunions/<int:pk>/', views.reunion_detail, name='reunion_detail'),
+    path('notifications/', views.notifications_list, name='notifications_list'),
+    path('notifications/lire/', views.notifications_lire, name='notifications_lire'),
+]

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /fonctionnalites
+Allow: /tarifs
+Allow: /faq
+Allow: /login
+Allow: /register
+Disallow: /dashboard
+Disallow: /projets
+Disallow: /finances
+Disallow: /chantier
+Disallow: /temps
+Disallow: /paie
+Disallow: /rentabilite
+Disallow: /documents
+Disallow: /contrats
+Disallow: /settings
+
+Sitemap: https://planneralger.com/sitemap.xml
