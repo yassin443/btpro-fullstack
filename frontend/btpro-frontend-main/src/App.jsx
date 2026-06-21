@@ -7,6 +7,7 @@ import Faq from './pages/Landing/Faq'
 import Contact from './pages/Landing/Contact'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
+import Reset from './pages/Auth/Reset'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Projets from './pages/Projets/Projets'
 import ProjetDetail from './pages/Projets/ProjetDetail'
@@ -21,11 +22,12 @@ import Planning from './pages/Planning/Planning'
 import RapportTerrain from './pages/Rapports/RapportTerrain'
 import Settings from './pages/Settings/Settings'
 import SousTraitants from './pages/SousTraitants/SousTraitants'
-import SuperAdmin from './pages/SuperAdmin/SuperAdmin'
+import SuperAdmin from './pages/Admin/Admin'
 import Contrats from './pages/Contrats/Contrats'
 import Paie from './pages/Paie/Paie'
 import Permis from './pages/Permis/Permis'
 import Reunions from './pages/Reunions/Reunions'
+import Notifications from './pages/Notifications/Notifications'
 import PaymentSuccess from './pages/Payment/PaymentSuccess'
 import PaymentFailed from './pages/Payment/PaymentFailed'
 import PaymentCheckout from './pages/Payment/PaymentCheckout'
@@ -82,6 +84,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/reset" element={<Reset />} />
             <Route path="/payment/checkout" element={<PrivateRoute><PaymentCheckout /></PrivateRoute>} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/failed" element={<PaymentFailed />} />
@@ -99,7 +102,8 @@ export default function App() {
             <Route path="/sous-traitants" element={<PatronRoute><SubscriptionRoute><SousTraitants /></SubscriptionRoute></PatronRoute>} />
             <Route path="/ma-remuneration" element={<SubscriptionRoute><MaRemuneration /></SubscriptionRoute>} />
             <Route path="/permis" element={<PatronRoute><SubscriptionRoute><Permis /></SubscriptionRoute></PatronRoute>} />
-            <Route path="/reunions" element={<PatronRoute><SubscriptionRoute><Reunions /></SubscriptionRoute></PatronRoute>} />
+            <Route path="/reunions" element={<SubscriptionRoute><Reunions /></SubscriptionRoute>} />
+            <Route path="/notifications" element={<SubscriptionRoute><Notifications /></SubscriptionRoute>} />
 
             <Route path="/finances" element={<PatronRoute><SubscriptionRoute><Finances /></SubscriptionRoute></PatronRoute>} />
             <Route path="/alertes" element={<PatronRoute><SubscriptionRoute><Alertes /></SubscriptionRoute></PatronRoute>} />

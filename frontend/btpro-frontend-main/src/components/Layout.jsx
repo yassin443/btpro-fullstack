@@ -94,6 +94,10 @@ export default function Layout({ children }) {
                 { label: 'Projets',      path: '/projets',       icon: FolderKanban },
                 ...(isPatron ? [{ label: 'Clients', path: '/clients', icon: Users }] : []),
                 { label: 'Chantier',     path: '/chantier',      icon: HardHat },
+                ...(!isPatron ? [
+                    { label: 'Réunions',      path: '/reunions',      icon: CalendarDays },
+                    { label: 'Notifications', path: '/notifications', icon: Bell },
+                ] : []),
             ]
         },
         ...(isPatron ? [{

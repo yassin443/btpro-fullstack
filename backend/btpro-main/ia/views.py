@@ -46,10 +46,17 @@ Question : {contenu}"""
     try:
         client = anthropic.Anthropic()
         message = client.messages.create(
-            model='claude-sonnet-4-20250514',
-            max_tokens=1500,
+            model='claude-opus-4-8',
+            max_tokens=2000,
             messages=[{'role': 'user', 'content': prompts[outil]}]
         )
-        return Response({'result': message.content[0].text})
+        text = next((b.text for b in message.content if getattr(b, 'type', None) == 'text'), '')
+        # Journalise l'utilisation (best-effort, ne bloque jamais la réponse)
+        try:
+            from .models import IAUsage
+            IAUsage.objects.create(cabinet=request.user.cabinet, user=request.user, outil=outil)
+        except Exception:
+            pass
+        return Response({'result': text})
     except Exception as e:
         return Response({'error': str(e)}, status=500)

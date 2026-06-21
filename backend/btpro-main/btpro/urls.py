@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/finances/', include('finances.urls')),
     path('api/documents/', include('documents.urls')),
     path('api/contrats/', include('contrats.urls')),
+    path('api/ia/', include('ia.urls')),
     path('api/superadmin/', include('cabinets.superadmin_urls')),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

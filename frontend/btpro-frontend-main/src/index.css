@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ── DESIGN TOKENS ── */
 :root {
   --bg:          #F8F7FC;

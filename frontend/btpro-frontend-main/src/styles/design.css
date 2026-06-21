@@ -1,0 +1,89 @@
+/* ========================================================================
+   Design-system animations & motifs — Planner refonte (landing / auth / admin)
+   Scoped, class-based; does not override the in-app dashboard styles.
+   ======================================================================== */
+
+html { scroll-behavior: smooth; }
+
+/* ---------- Scoped preflight essentials (Tailwind preflight is OFF) ----------
+   Only applies inside .planner-site so the existing dashboard CSS is untouched. */
+.planner-site *, .planner-site *::before, .planner-site *::after {
+  border-width: 0; border-style: solid; border-color: #ECECF2;
+}
+.planner-site h1, .planner-site h2, .planner-site h3, .planner-site h4,
+.planner-site p, .planner-site blockquote, .planner-site figure,
+.planner-site ul, .planner-site ol { margin: 0; }
+.planner-site ul, .planner-site ol { list-style: none; padding: 0; }
+.planner-site a { color: inherit; text-decoration: none; }
+.planner-site img, .planner-site svg { display: block; }
+.planner-site button { background: none; padding: 0; }
+
+.planner-site .font-mono { font-feature-settings: "tnum" on; }
+
+/* ---------- Blueprint grid ---------- */
+.blueprint-bg {
+  background-image:
+    linear-gradient(to right, rgba(17,0,255,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,0,255,0.045) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+.blueprint-fade {
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+          mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+}
+
+/* interactive grid cells */
+.igrid-cell { transition: background-color .45s ease, box-shadow .45s ease; }
+.igrid-cell:hover { background-color: rgba(17,0,255,0.06); box-shadow: inset 0 0 0 1px rgba(17,0,255,0.12); transition: background-color .05s ease; }
+
+/* ---------- Reveal (blur-fade-up) ---------- */
+.reveal { opacity: 0; transform: translateY(18px); filter: blur(8px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease; will-change: opacity, transform, filter; }
+.reveal.is-in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- Border beam ---------- */
+.beam-wrap { position: relative; }
+.beam-comet {
+  position: absolute; top: 0; left: 0;
+  width: 200px; height: 2px; border-radius: 99px;
+  background: linear-gradient(90deg, transparent, rgba(17,0,255,0), #1100FF 50%, #7a6bff 70%, transparent);
+  box-shadow: 0 0 14px 1px rgba(17,0,255,0.55);
+  offset-path: rect(0 100% 100% 0);
+  offset-rotate: auto;
+  offset-distance: 0%;
+  animation: beam-travel var(--beam-dur, 7s) linear infinite;
+  pointer-events: none;
+}
+@keyframes beam-travel { to { offset-distance: 100%; } }
+
+/* ---------- Marquee ---------- */
+@keyframes marquee-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+           mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marquee-x 34s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ---------- Step connector ---------- */
+@keyframes dash-flow { to { background-position: -200px 0; } }
+.step-line {
+  background-image: linear-gradient(90deg, rgba(17,0,255,0.35) 0 10px, transparent 10px 20px);
+  background-size: 20px 100%;
+  animation: dash-flow 3.5s linear infinite;
+}
+
+/* ---------- Misc ---------- */
+.tap-ring:focus-visible { outline: 2px solid #1100FF; outline-offset: 2px; }
+@keyframes float-soft { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.float-soft { animation: float-soft 6s ease-in-out infinite; }
+@keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+
+/* ---------- Auth (login / register / reset) ---------- */
+@keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-5px); } 40%,80% { transform: translateX(5px); } }
+@keyframes step-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+  .beam-comet, .marquee-track, .step-line, .float-soft { animation: none !important; }
+  html { scroll-behavior: auto; }
+}

@@ -49,8 +49,18 @@ def create_checkout(request):
     frontend_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:5173')
     backend_url = getattr(settings, 'BACKEND_URL', 'http://localhost:8000')
 
+    # Tarif depuis PlanConfig (éditable) avec repli sur PLAN_PRICES
+    amount = PLAN_PRICES[plan]
+    try:
+        from cabinets.models import PlanConfig
+        pc = PlanConfig.objects.filter(code=plan).first()
+        if pc and pc.prix:
+            amount = int(pc.prix)
+    except Exception:
+        pass
+
     payload = {
-        'amount': PLAN_PRICES[plan],
+        'amount': amount,
         'currency': 'dzd',
         'success_url': f'{frontend_url}/payment/success',
         'failure_url': f'{frontend_url}/payment/failed',
